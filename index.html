@@ -509,6 +509,14 @@
                         <input type="text" id="acompanante_nombre_${acompananteCount}" name="Acompañante Nombre ${acompananteCount}" placeholder="Nombre completo" required>
                     </div>
                     <div class="form-group">
+                        <label for="acompanante_edad_${acompananteCount}">Edad</label>
+                        <input type="number" id="acompanante_edad_${acompananteCount}" name="Acompañante Edad ${acompananteCount}" placeholder="Edad del acompañante" min="1" max="120" required>
+                    </div>
+                    <div class="form-group" id="doc-container-${acompananteCount}" style="display: none;">
+                        <label for="acompanante_documento_${acompananteCount}">Número de documento</label>
+                        <input type="text" id="acompanante_documento_${acompananteCount}" name="Acompañante Documento ${acompananteCount}" placeholder="Número de documento">
+                    </div>
+                    <div class="form-group">
                         <label for="acompanante_parentezco_${acompananteCount}">Parentezco</label>
                         <select id="acompanante_parentezco_${acompananteCount}" name="Acompañante Parentezco ${acompananteCount}" required>
                             <option value="">Seleccione parentezco</option>
@@ -521,6 +529,20 @@
                 `;
                 
                 acompananteItems.appendChild(itemDiv);
+
+                // Agregar evento para validar edad y mostrar campo de documento
+                document.getElementById(`acompanante_edad_${acompananteCount}`).addEventListener('change', function() {
+                    const edad = parseInt(this.value);
+                    const docContainer = document.getElementById(`doc-container-${acompananteCount}`);
+                    
+                    if (edad >= 18) {
+                        docContainer.style.display = 'block';
+                        docContainer.querySelector('input').required = true;
+                    } else {
+                        docContainer.style.display = 'none';
+                        docContainer.querySelector('input').required = false;
+                    }
+                });
             }
 
             // Manejar el campo de transporte
