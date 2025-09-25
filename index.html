@@ -38,27 +38,22 @@
 
         .form-container {
             background: 
-                /* Capa semitransparente (opcional) */
-                /* linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.9)), */
                 url('F.png') center center no-repeat;
-            background-size: cover; /* Asegura que cubra todo el contenedor */
-            background-position: center; /* Centra la imagen */
-            background-color: #fff; /* Fondo de respaldo si la imagen no carga */
+            background-size: cover;
+            background-position: center;
+            background-color: #fff;
             padding: 2rem;
             border-radius: 16px;
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
             width: 90%;
             max-width: 450px;
             position: relative;
-            overflow: hidden; /* Evita que el contenido se desborde */
+            overflow: hidden;
             transition: transform 0.3s ease;
         }
 
         .form-container1 {
             background: 
-                /* Capa blanca semitransparente encima de la imagen */
-                /*linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 1.3)),no-repeat
-                /* Imagen de fondo */
                 url('/Users/amc/Documents/Cumbre_LR/F.png')  center center;
             background-size: cover;
             padding: 2rem;
@@ -92,12 +87,10 @@
         }
 
         .header-image {
-    text-align: center;
-    margin: -2rem -2rem 1rem -2rem; /* Ajustado para mover la imagen hacia arriba */
-    width: calc(100% + 4rem);
-}
-
-        
+            text-align: center;
+            margin: -2rem -2rem 1rem -2rem;
+            width: calc(100% + 4rem);
+        }
 
         .header-image img {
             width: 100%;
@@ -202,21 +195,21 @@
         }
 
         .btn-submit {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        padding: 14px;
-        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-        border: none;
-        border-radius: 8px;
-        font-size: 1rem;
-        color: white;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        margin-top: 0.5rem;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .btn-submit:hover {
@@ -310,8 +303,8 @@
         @media (max-width: 576px) {
             .form-container {
                 padding: 1.5rem;
-                max-width: 500px; /* Aumentamos el ancho máximo */
-                width: 98%; /* Aumentamos el porcentaje de ancho */
+                max-width: 500px;
+                width: 98%;
             }
             
             .form-title {
@@ -322,7 +315,6 @@
                 max-height: 600px;
             }
             
-            /* Opcional: Ajustar el ancho de la línea decorativa del título */
             .form-title::after {
                 width: 100%;
             }
@@ -340,6 +332,11 @@
 
         <form action="#" method="post">
 
+            <div class="form-group">
+                <label for="nombre_lider">Nombre completo del Líder</label>
+                <input type="text" id="nombre_lider" name="Nombre completo del Líder" placeholder="Escribe el nombre completo del líder" required>
+                <i class="fas fa-user-tie"></i>
+            </div>
             
             <div class="form-group">
                 <label for="nombre">Nombre Completo</label>
@@ -347,6 +344,7 @@
                 <i class="fas fa-user"></i>
             </div>
 
+            <!-- Nuevo campo: Nombre completo del Líder -->
             
             
             <div class="form-group">
@@ -393,24 +391,6 @@
                 <button type="button" id="add-acompanante" class="add-acompanante" style="display: none;">
                     <i class="fas fa-plus"></i> Agregar Acompañante
                 </button>
-            </div>
-
-            <div class="form-group">
-                <label for="transporte">¿Tiene medio de transporte para llegar al evento con su familia?</label>
-                <select id="transporte" name="Transporte Propio">
-                    <option value="">Selecciona una opción</option>
-                    <option value="Si">Sí</option>
-                    <option value="No">No</option>
-                </select>
-            </div>
-
-            <div id="necesita-transporte-container" style="display: none;" class="form-group">
-                <label for="necesita_transporte">¿Necesitas medio de transporte?</label>
-                <select id="necesita_transporte" name="Necesita Transporte">
-                    <option value="">Selecciona una opción</option>
-                    <option value="Si">Sí</option>
-                    <option value="No">No</option>
-                </select>
             </div>
 
             <!-- Nuevos campos agregados aquí -->
@@ -545,18 +525,6 @@
                 });
             }
 
-            // Manejar el campo de transporte
-            const transporteSelect = document.getElementById('transporte');
-            const necesitaTransporteContainer = document.getElementById('necesita-transporte-container');
-
-            transporteSelect.addEventListener('change', function() {
-                if (this.value === 'No') {
-                    necesitaTransporteContainer.style.display = 'block';
-                } else {
-                    necesitaTransporteContainer.style.display = 'none';
-                }
-            });
-
             // Manejo del envío del formulario
             document.querySelector('.form-container form').addEventListener('submit', function (event) {
                 event.preventDefault();
@@ -571,7 +539,7 @@
                 console.log(data)
                 
                 // Validación de campos obligatorios
-                if (!formData.get('Nombre Completo') || !numeroIdentificacion || !formData.get('Teléfono') || 
+                if (!formData.get('Nombre Completo') || !formData.get('Nombre completo del Líder') || !numeroIdentificacion || !formData.get('Teléfono') || 
                     !formData.get('Dirección') || !formData.get('Barrio')) {
                     showCustomAlert('Por favor, completa todos los campos requeridos.', 'warning');
                     return;
