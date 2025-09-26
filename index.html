@@ -319,6 +319,11 @@
                 width: 100%;
             }
         }
+        .header-image {
+            text-align: center;
+            margin: -1.3rem -2rem 0.5rem -2rem; /* Cambiado de -2rem a 0rem para el margen superior */
+            width: calc(100% + 4rem);
+        }
     </style>
 </head>
 <body>
@@ -352,8 +357,8 @@
                 <select id="tipo_documento" name="Tipo de documento" required>
                     <option value="">Selecciona tu tipo de documento</option>
                     <option value="Cédula de Ciudadanía">Cédula de Ciudadanía</option>
-                    <option value="Pasaporte">Pasaporte</option>
-                    <option value="Cédula de Extranjería">Cédula de Extranjería</option>
+                    <!--option value="Pasaporte">Pasaporte</option>
+                    <option value="Cédula de Extranjería">Cédula de Extranjería</option-->
                 </select>
             </div>
             
@@ -488,41 +493,31 @@
                         <label for="acompanante_nombre_${acompananteCount}">Nombre del Acompañante ${acompananteCount}</label>
                         <input type="text" id="acompanante_nombre_${acompananteCount}" name="Acompañante Nombre ${acompananteCount}" placeholder="Nombre completo" required>
                     </div>
+                    
                     <div class="form-group">
-                        <label for="acompanante_edad_${acompananteCount}">Edad</label>
-                        <input type="number" id="acompanante_edad_${acompananteCount}" name="Acompañante Edad ${acompananteCount}" placeholder="Edad del acompañante" min="1" max="120" required>
-                    </div>
-                    <div class="form-group" id="doc-container-${acompananteCount}" style="display: none;">
-                        <label for="acompanante_documento_${acompananteCount}">Número de documento</label>
-                        <input type="text" id="acompanante_documento_${acompananteCount}" name="Acompañante Documento ${acompananteCount}" placeholder="Número de documento">
-                    </div>
-                    <div class="form-group">
-                        <label for="acompanante_parentezco_${acompananteCount}">Parentezco</label>
-                        <select id="acompanante_parentezco_${acompananteCount}" name="Acompañante Parentezco ${acompananteCount}" required>
-                            <option value="">Seleccione parentezco</option>
-                            <option value="Esposo/a">Esposo/a</option>
-                            <option value="Hijo/a">Hijo/a</option>
-                            <option value="Hermano/a">Hermano/a</option>
-                            <option value="Papá/Mamá">Papá/Mamá</option>
+                        <label for="acompanante_tipo_documento_${acompananteCount}">Tipo de Documento</label>
+                        <select id="acompanante_tipo_documento_${acompananteCount}" name="Acompañante Tipo de Documento ${acompananteCount}" required>
+                            <option value="">Selecciona tipo de documento</option>
+                            <option value="Cédula de Ciudadanía">Cédula de Ciudadanía</option>
+                            <option value="Trajeta de Identidad">Tarjeta de Identidad</option>
+                            <option value="Registro civil">Registro Civil</option>
                         </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="acompanante_numero_documento_${acompananteCount}">Número de Documento</label>
+                        <input type="text" id="acompanante_numero_documento_${acompananteCount}" name="Acompañante Documento ${acompananteCount}" placeholder="Número de documento" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="acompanante_fecha_nacimiento_${acompananteCount}">Fecha de Nacimiento</label>
+                        <input type="date" id="acompanante_fecha_nacimiento_${acompananteCount}" name="Acompañante Fecha de Nacimiento ${acompananteCount}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="acompanante_telefono_${acompananteCount}">Teléfono</label>
+                        <input type="tel" id="acompanante_telefono_${acompananteCount}" name="Acompañante Teléfono ${acompananteCount}" placeholder="Teléfono del acompañante" required>
                     </div>
                 `;
                 
                 acompananteItems.appendChild(itemDiv);
-
-                // Agregar evento para validar edad y mostrar campo de documento
-                document.getElementById(`acompanante_edad_${acompananteCount}`).addEventListener('change', function() {
-                    const edad = parseInt(this.value);
-                    const docContainer = document.getElementById(`doc-container-${acompananteCount}`);
-                    
-                    if (edad >= 18) {
-                        docContainer.style.display = 'block';
-                        docContainer.querySelector('input').required = true;
-                    } else {
-                        docContainer.style.display = 'none';
-                        docContainer.querySelector('input').required = false;
-                    }
-                });
             }
 
             // Manejo del envío del formulario
