@@ -272,34 +272,6 @@
         .form-group:nth-child(8) { animation-delay: 0.8s; }
         .btn-submit { animation: fadeIn 0.5s ease 0.9s forwards; opacity: 0; }
 
-        /* Estilos para los campos de acompañante */
-        .acompanante-container {
-            display: none;
-            margin-top: 10px;
-            padding: 10px;
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            border: 1px solid #e9ecef;
-        }
-
-        .acompanante-item {
-            margin-bottom: 10px;
-        }
-
-        .add-acompanante {
-            margin-top: 10px;
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .add-acompanante:hover {
-            background-color: var(--secondary-color);
-        }
-
         @media (max-width: 576px) {
             .form-container {
                 padding: 1.5rem;
@@ -380,24 +352,6 @@
                 <i class="fas fa-phone"></i>
             </div>
 
-            <div class="form-group">
-                <label for="acompanante">¿Va a llevar acompañante?</label>
-                <select id="acompanante" name="Acompañante">
-                    <option value="">Selecciona una opción</option>
-                    <option value="Si">Sí</option>
-                    <option value="No">No</option>
-                </select>
-            </div>
-
-            <div id="acompanante-container" class="acompanante-container">
-                <div id="acompanante-items">
-                    <!-- Aquí se agregarán los campos de acompañante dinámicamente -->
-                </div>
-                <button type="button" id="add-acompanante" class="add-acompanante" style="display: none;">
-                    <i class="fas fa-plus"></i> Agregar Acompañante
-                </button>
-            </div>
-
             <!-- Nuevos campos agregados aquí -->
             <div class="form-group">
                 <label for="direccion">Dirección</label>
@@ -444,82 +398,7 @@
         </form>
     </div>
     <script>
-        // Script para manejar los campos dinámicos de acompañante
         document.addEventListener('DOMContentLoaded', function() {
-            // Manejar el campo de acompañante
-            const acompananteSelect = document.getElementById('acompanante');
-            const acompananteContainer = document.getElementById('acompanante-container');
-            const addAcompananteBtn = document.getElementById('add-acompanante');
-            const acompananteItems = document.getElementById('acompanante-items');
-            
-            let acompananteCount = 0;
-            const maxAcompanantes = 5;
-
-            acompananteSelect.addEventListener('change', function() {
-                if (this.value === 'Si') {
-                    acompananteContainer.style.display = 'block';
-                    addAcompananteBtn.style.display = 'inline-block';
-                    // Agregar el primer acompañante automáticamente
-                    if (acompananteCount === 0) {
-                        addAcompanante();
-                    }
-                } else {
-                    acompananteContainer.style.display = 'none';
-                    addAcompananteBtn.style.display = 'none';
-                    // Limpiar los acompañantes
-                    acompananteItems.innerHTML = '';
-                    acompananteCount = 0;
-                }
-            });
-
-            addAcompananteBtn.addEventListener('click', function() {
-                if (acompananteCount < maxAcompanantes) {
-                    addAcompanante();
-                }
-                if (acompananteCount >= maxAcompanantes) {
-                    this.style.display = 'none';
-                }
-            });
-
-            function addAcompanante() {
-                if (acompananteCount >= maxAcompanantes) return;
-                
-                acompananteCount++;
-                
-                const itemDiv = document.createElement('div');
-                itemDiv.className = 'acompanante-item';
-                itemDiv.innerHTML = `
-                    <div class="form-group">
-                        <label for="acompanante_nombre_${acompananteCount}">Nombre del Acompañante ${acompananteCount}</label>
-                        <input type="text" id="acompanante_nombre_${acompananteCount}" name="Acompañante Nombre ${acompananteCount}" placeholder="Nombre completo" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="acompanante_tipo_documento_${acompananteCount}">Tipo de Documento</label>
-                        <select id="acompanante_tipo_documento_${acompananteCount}" name="Acompañante Tipo de Documento ${acompananteCount}" required>
-                            <option value="">Selecciona tipo de documento</option>
-                            <option value="Cédula de Ciudadanía">Cédula de Ciudadanía</option>
-                            <option value="Trajeta de Identidad">Tarjeta de Identidad</option>
-                            <option value="Registro civil">Registro Civil</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="acompanante_numero_documento_${acompananteCount}">Número de Documento</label>
-                        <input type="text" id="acompanante_numero_documento_${acompananteCount}" name="Acompañante Documento ${acompananteCount}" placeholder="Número de documento" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="acompanante_fecha_nacimiento_${acompananteCount}">Fecha de Nacimiento</label>
-                        <input type="date" id="acompanante_fecha_nacimiento_${acompananteCount}" name="Acompañante Fecha de Nacimiento ${acompananteCount}" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="acompanante_telefono_${acompananteCount}">Teléfono</label>
-                        <input type="tel" id="acompanante_telefono_${acompananteCount}" name="Acompañante Teléfono ${acompananteCount}" placeholder="Teléfono del acompañante" required>
-                    </div>
-                `;
-                
-                acompananteItems.appendChild(itemDiv);
-            }
-
             // Manejo del envío del formulario
             document.querySelector('.form-container form').addEventListener('submit', function (event) {
                 event.preventDefault();
